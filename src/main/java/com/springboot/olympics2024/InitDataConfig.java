@@ -12,7 +12,6 @@ import repository.SportRepository;
 
 import java.time.LocalDateTime;
 import java.time.Month;
-import java.util.Date;
 
 @Component
 public class InitDataConfig implements CommandLineRunner {
@@ -34,6 +33,8 @@ public class InitDataConfig implements CommandLineRunner {
         Sport rugby = sportRepository.save(new Sport("Rugby"));
         Sport basketball = sportRepository.save(new Sport("Basketball"));
         Sport cycling = sportRepository.save(new Sport("Cycling"));
+        Sport canoe = sportRepository.save(new Sport("Canoe"));
+
 
         // Seeding database with disciplines
 
@@ -53,6 +54,11 @@ public class InitDataConfig implements CommandLineRunner {
         disciplineRepository.save(new Discipline("Road", false, cycling));
         disciplineRepository.save(new Discipline("Track", true, cycling));
         disciplineRepository.save(new Discipline("Track", false, cycling));
+
+        Discipline mensCanoeSlalom = disciplineRepository.save(new Discipline("Slalom", true, canoe));
+        Discipline womensCanoeSlalom = disciplineRepository.save(new Discipline("Slalom", false, canoe));
+        Discipline mensCanoeSprint = disciplineRepository.save(new Discipline("Sprint", true, canoe));
+        Discipline womensCanoeSprint = disciplineRepository.save(new Discipline("Sprint", false, canoe));
 
         // Seeding the database with games
 

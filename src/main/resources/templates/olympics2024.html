@@ -3,10 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <title>Olympics 2024</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" type="text/css" th:href="@{/css/home.css}">
 </head>
 <body>
-<h1>Welcome to Olympics 2024</h1>
-<p>This is a sample page for the Olympics 2024 application.</p>
+<header>
+    <h1 th:text="#{home.header}"/>
+</header>
+
+<div class="sports-container">
+    <div class="description">
+        <h2 th:text="#{home.descriptiontitle}"/>
+        <div th:text="#{home.description}"/>
+    </div>
+    <ul class="sports-list">
+        <li th:each="sport : ${sports}">
+            <a th:href="@{olympics2024/sports/{name}(name=${#strings.toLowerCase(sport.name)})}">
+                <span th:text="${sport.name}" /> (<span th:text="${#lists.size(sport.disciplines)}"/> <span th:text="#{home.disciplines}" />)
+            </a>
+        </li>
+    </ul>
+</div>
+
 </body>
 </html>
