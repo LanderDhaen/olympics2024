@@ -31,9 +31,9 @@ public class SecurityConfig{
 
         http.authorizeHttpRequests(requests ->
                         requests.requestMatchers("/login**").permitAll()
-                                .requestMatchers("/accessdenied**").permitAll()
                                 .requestMatchers("/css/**").permitAll()
-                                .requestMatchers("/olympics2024").hasAnyRole("USER"))
+                                .requestMatchers("/accessdenied**").permitAll()
+                                .requestMatchers("/olympics2024").hasAnyRole("USER", "ADMIN"))
                 .formLogin(form ->
                         form
                                 .defaultSuccessUrl("/olympics2024", true)
