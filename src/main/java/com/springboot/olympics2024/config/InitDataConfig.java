@@ -1,4 +1,4 @@
-package com.springboot.olympics2024;
+package com.springboot.olympics2024.config;
 
 import domain.Discipline;
 import domain.Game;
