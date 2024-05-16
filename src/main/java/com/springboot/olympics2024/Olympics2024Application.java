@@ -24,6 +24,7 @@ public class Olympics2024Application implements WebMvcConfigurer {
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addRedirectViewController("/", "/olympics2024");
+        registry.addViewController("/accessdenied").setViewName("/accessdenied");
     }
 
     @Bean
