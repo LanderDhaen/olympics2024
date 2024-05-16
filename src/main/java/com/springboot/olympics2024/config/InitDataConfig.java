@@ -2,13 +2,18 @@ package com.springboot.olympics2024.config;
 
 import domain.Discipline;
 import domain.Game;
+import domain.Spectator;
 import domain.Sport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import repository.DisciplineRepository;
 import repository.GameRepository;
+import repository.SpectatorRepository;
 import repository.SportRepository;
+import util.Role;
 
 import java.time.LocalDateTime;
 import java.time.Month;
@@ -22,9 +27,18 @@ public class InitDataConfig implements CommandLineRunner {
     private DisciplineRepository disciplineRepository;
     @Autowired
     private GameRepository gameRepository;
+    @Autowired
+    private SpectatorRepository spectatorRepository;
+
+    private PasswordEncoder encoder = new BCryptPasswordEncoder();
 
     @Override
     public void run(String... args) {
+
+        // Seeding database with spectators
+
+        spectatorRepository.save(new Spectator("User", encoder.encode("12345678"), Role.USER));
+        spectatorRepository.save(new Spectator("Admin", encoder.encode("12345678"), Role.ADMIN));
 
         // Seeding database with sports
 
@@ -34,7 +48,6 @@ public class InitDataConfig implements CommandLineRunner {
         Sport basketball = sportRepository.save(new Sport("Basketball"));
         Sport cycling = sportRepository.save(new Sport("Cycling"));
         Sport canoe = sportRepository.save(new Sport("Canoe"));
-
 
         // Seeding database with disciplines
 
