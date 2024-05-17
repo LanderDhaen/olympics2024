@@ -75,12 +75,12 @@ public class InitDataConfig implements CommandLineRunner {
         Discipline womensCanoeSprint = disciplineRepository.save(new Discipline("Canoe Single 200m", false));
 
         // Seeding the database with games
-
+    /*
         gameRepository.save(new Game(LocalDateTime.of(2024, Month.JULY, 31, 18, 35), "Place de la Concorde 1", 0, 99.99, basketball, List.of(mens3x3)));
         gameRepository.save(new Game(LocalDateTime.of(2024, Month.JULY, 30, 17, 30), "Place de la Concorde 1", 10, 99.99, basketball, List.of(mens3x3)));
         gameRepository.save(new Game(LocalDateTime.of(2024, Month.JULY, 30, 18, 35), "Place de la Concorde 1", 44, 99.99, basketball, List.of(womens3x3)));
 
         gameRepository.save(new Game(LocalDateTime.of(2024, Month.JULY, 27, 15, 40), "Vaires-sur-Marne Nautical Stadium", 0, 99.99, canoe, List.of(womensCanoeSlalom, mensCanoeSlalom)));
-        gameRepository.save(new Game(LocalDateTime.of(2024, Month.AUGUST, 8, 10, 30), "Vaires-sur-Marne Nautical Stadium", 1, 49.99, canoe, List.of(womensCanoeSprint, mensCanoeSprint)));
+      */  gameRepository.save(new Game(LocalDateTime.of(2024, Month.AUGUST, 8, 10, 30), "Vaires-sur-Marne Nautical Stadium",1235, 1335, 1, 49.99, List.of(womensCanoeSprint, mensCanoeSprint), canoe));
     }
 }

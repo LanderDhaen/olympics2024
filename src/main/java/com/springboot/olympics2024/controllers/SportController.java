@@ -15,7 +15,7 @@ public class SportController {
     @Autowired
     private SportService sportService;
 
-    @GetMapping("/sport/{name}")
+    @GetMapping("/sports/{name}")
     public String sportdetail(@PathVariable("name") String name, Model model) {
         model.addAttribute("sport", sportService.findByName(name));
 

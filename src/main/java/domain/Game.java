@@ -1,10 +1,16 @@
 package domain;
 
+import jakarta.validation.constraints.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import jakarta.persistence.*;
+import lombok.Setter;
+import validator.ValidDate;
+import validator.ValidOlympicNumber1;
+import validator.ValidOlympicNumber2;
+import validator.ValidTicketPrice;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -12,7 +18,8 @@ import java.util.List;
 
 @Entity
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Setter
+@NoArgsConstructor(access = AccessLevel.PUBLIC)
 
 public class Game implements Serializable {
 
@@ -22,12 +29,26 @@ public class Game implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @ValidDate
     private LocalDateTime date;
 
     private String location;
 
+    @NotNull
+    @ValidOlympicNumber1
+    private int olympicNumber1;
+
+    @NotNull
+    @ValidOlympicNumber2
+    private int olympicNumber2;
+
+    @NotNull
+    @Min(value = 1, message = "{validator.validSeats.min}")
+    @Max(value = 50, message = "{validator.validSeats.max}")
     private int remainingSeats;
 
+    @NotNull
+    @ValidTicketPrice
     private double ticketPrice;
 
     @ManyToMany
@@ -42,12 +63,14 @@ public class Game implements Serializable {
     @JoinColumn(name = "sportID")
     private Sport sport;
 
-    public Game(LocalDateTime  date, String location, int remainingSeats, double ticketPrice, Sport sport, List<Discipline> disciplines) {
+    public Game(LocalDateTime date, String location, int olympicNumber1, int olympicNumber2, int remainingSeats, double ticketPrice, List<Discipline> disciplines, Sport sport) {
         this.date = date;
         this.location = location;
+        this.olympicNumber1 = olympicNumber1;
+        this.olympicNumber2 = olympicNumber2;
         this.remainingSeats = remainingSeats;
         this.ticketPrice = ticketPrice;
-        this.sport = sport;
         this.disciplines = disciplines;
+        this.sport = sport;
     }
 }

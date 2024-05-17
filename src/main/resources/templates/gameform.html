@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Game</title>
+</head>
+<body>
+<h1>Add Game</h1>
+<form th:action="@{/olympics2024/games/create/canoe}" th:object="${game}" method="post">
+    <div>
+        <label for="date">Datum en aanvangsuur:</label>
+        <input type="datetime-local" id="date" th:field="*{date}">
+        <div th:if="${#fields.hasErrors('date')}" th:errors="*{date}"></div>
+    </div>
+    <div>
+        <label for="stadium">Naam van stadium:</label>
+        <select id="stadium" name="stadium">
+            <option value="stadium1">Stadium 1</option>
+            <option value="stadium2">Stadium 2</option>
+            <!-- Add more stadium options as needed -->
+        </select>
+    </div>
+    <div>
+        <label for="discipline1">Discipline 1:</label>
+        <input type="text" id="discipline1" name="discipline1">
+    </div>
+    <div>
+        <label for="discipline2">Discipline 2:</label>
+        <input type="text" id="discipline2" name="discipline2">
+    </div>
+    <div>
+        <label for="olympicNumber1">Olympisch-nummer1:</label>
+        <input type="number" id="olympicNumber1" name="olympicNumber1" pattern="[0-9]{5}" th:field="*{olympicNumber1}">
+        <div th:if="${#fields.hasErrors('olympicNumber1')}" th:errors="*{olympicNumber1}"></div>
+    </div>
+    <div>
+        <label for="olympicNumber2">Olympisch-nummer2:</label>
+        <input type="number" id="olympicNumber2" name="olympicNumber2" pattern="[0-9]{5}" th:field="*{olympicNumber2}">
+        <div th:if="${#fields.hasErrors('olympicNumber2')}" th:errors="*{olympicNumber2}"></div>
+    </div>
+    <div>
+        <label for="ticketPrice">Ticketprijs:</label>
+        <input type="number" id="ticketPrice" name="ticketPrice" step="0.01" th:field="*{ticketPrice}">
+        <div th:if="${#fields.hasErrors('ticketPrice')}" th:errors="*{ticketPrice}"></div>
+    </div>
+    <div>
+        <label for="remainingSeats">Aantal plaatsen:</label>
+        <input type="number" id="remainingSeats" name="remainingSeats" th:field="*{remainingSeats}">
+        <div th:if="${#fields.hasErrors('remainingSeats')}" th:errors="*{remainingSeats}"></div>
+    </div>
+    <div>
+        <button type="submit">Submit</button>
+    </div>
+</form>
+</body>
+</html>
