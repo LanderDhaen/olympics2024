@@ -14,8 +14,7 @@
         <a href="/olympics2024/tickets" class="btn" th:text="#{home.ticketbutton}"></a>
     </th:block>
     <th:block th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
-        <a th:href="@{~/olympics2024/games/create/{name}(name=${#strings.toLowerCase(sport.name)})}" >a</a>
-
+        <a th:href="@{~/olympics2024/games/create/{name}(name=${#strings.toLowerCase(sport.name)})}" class="btn" th:text="'+ ' + #{sport.addgame}"></a>
     </th:block>
 </header>
 
