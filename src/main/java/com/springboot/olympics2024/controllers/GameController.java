@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import service.GameService;
 import service.SportService;
+import validator.OlympicNumberValidator;
 
 @Controller
 @RequestMapping("/olympics2024")
@@ -20,12 +22,18 @@ public class GameController {
     @Autowired
     private SportService sportService;
 
+    @Autowired
+    private GameService gameService;
+
+    @Autowired
+    private OlympicNumberValidator olympicNumberValidator;
+
     @GetMapping("/games/create/{name}")
     public String showForm(@PathVariable("name") String name, Model model) {
 
         Sport sport = sportService.findByName(name);
 
-        model.addAttribute("game", new Game());
+        model.addAttribute("game", new Game(sport));
         model.addAttribute("sport", sport);
 
         return "gameform";
@@ -34,13 +42,15 @@ public class GameController {
     @PostMapping("/games/create/{name}")
     public String addGame(@Valid Game game, BindingResult result, @PathVariable("name") String name, Model model) {
 
+        olympicNumberValidator.validate(game, result);
+
         if (result.hasErrors()) {
             Sport sport = sportService.findByName(name);
             model.addAttribute("sport", sport);
             return "gameform";
         }
 
-        return ":redirect/olympics2024";
+        return "redirect:/olympics2024/sports/{name}";
 
     }
 

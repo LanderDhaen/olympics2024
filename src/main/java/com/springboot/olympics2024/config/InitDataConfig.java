@@ -81,6 +81,6 @@ public class InitDataConfig implements CommandLineRunner {
         gameRepository.save(new Game(LocalDateTime.of(2024, Month.JULY, 30, 18, 35), "Place de la Concorde 1", 44, 99.99, basketball, List.of(womens3x3)));
 
         gameRepository.save(new Game(LocalDateTime.of(2024, Month.JULY, 27, 15, 40), "Vaires-sur-Marne Nautical Stadium", 0, 99.99, canoe, List.of(womensCanoeSlalom, mensCanoeSlalom)));
-      */  gameRepository.save(new Game(LocalDateTime.of(2024, Month.AUGUST, 8, 10, 30), "Vaires-sur-Marne Nautical Stadium",1235, 1335, 1, 49.99, List.of(womensCanoeSprint, mensCanoeSprint), canoe));
+      */  gameRepository.save(new Game(LocalDateTime.of(2024, Month.AUGUST, 8, 10, 30), "Vaires-sur-Marne Nautical Stadium",12356, 12346, 1, 49.99, List.of(womensCanoeSprint, mensCanoeSprint), canoe));
     }
 }
