@@ -17,6 +17,7 @@ import util.Role;
 
 import java.time.LocalDateTime;
 import java.time.Month;
+import java.util.List;
 
 @Component
 public class InitDataConfig implements CommandLineRunner {
@@ -51,35 +52,35 @@ public class InitDataConfig implements CommandLineRunner {
 
         // Seeding database with disciplines
 
-        disciplineRepository.save(new Discipline("400m Freestyle", true, swimming));
-        disciplineRepository.save(new Discipline("50m Breaststroke", false, swimming));
+        disciplineRepository.save(new Discipline("400m Freestyle", true));
+        disciplineRepository.save(new Discipline("50m Breaststroke", false));
 
-        disciplineRepository.save(new Discipline("Seniors", true, waterpolo));
-        disciplineRepository.save(new Discipline("Seniors", false, waterpolo));
-        
-        disciplineRepository.save(new Discipline("Sevens", true, rugby));
-        disciplineRepository.save(new Discipline("Sevens", false, rugby));
+        disciplineRepository.save(new Discipline("Seniors", true));
+        disciplineRepository.save(new Discipline("Seniors", false));
 
-        Discipline mens3x3 = disciplineRepository.save(new Discipline("3x3", true, basketball));
-        Discipline womens3x3 = disciplineRepository.save(new Discipline("3x3", false, basketball));
+        disciplineRepository.save(new Discipline("Sevens", true));
+        disciplineRepository.save(new Discipline("Sevens", false));
 
-        disciplineRepository.save(new Discipline("Road", true, cycling));
-        disciplineRepository.save(new Discipline("Road", false, cycling));
-        disciplineRepository.save(new Discipline("Track", true, cycling));
-        disciplineRepository.save(new Discipline("Track", false, cycling));
+        Discipline mens3x3 = disciplineRepository.save(new Discipline("3x3", true));
+        Discipline womens3x3 = disciplineRepository.save(new Discipline("3x3", false));
 
-        Discipline mensCanoeSlalom = disciplineRepository.save(new Discipline("Slalom", true, canoe));
-        Discipline womensCanoeSlalom = disciplineRepository.save(new Discipline("Slalom", false, canoe));
-        Discipline mensCanoeSprint = disciplineRepository.save(new Discipline("Sprint", true, canoe));
-        Discipline womensCanoeSprint = disciplineRepository.save(new Discipline("Sprint", false, canoe));
+        disciplineRepository.save(new Discipline("Road", true));
+        disciplineRepository.save(new Discipline("Road", false));
+        disciplineRepository.save(new Discipline("Track", true));
+        disciplineRepository.save(new Discipline("Track", false));
+
+        Discipline mensCanoeSlalom = disciplineRepository.save(new Discipline("Canoe Single Slalom", true));
+        Discipline womensCanoeSlalom = disciplineRepository.save(new Discipline("Canoe Single Slalom", false));
+        Discipline mensCanoeSprint = disciplineRepository.save(new Discipline("Canoe Single 200m", true));
+        Discipline womensCanoeSprint = disciplineRepository.save(new Discipline("Canoe Single 200m", false));
 
         // Seeding the database with games
 
-        gameRepository.save(new Game(LocalDateTime.of(2024, Month.JULY, 30, 17, 30), "Place de la Concorde 1", 10, 100.00, mens3x3));
-        gameRepository.save(new Game(LocalDateTime.of(2024, Month.JULY, 30, 18, 35), "Place de la Concorde 1", 44, 100.00, womens3x3));
+        gameRepository.save(new Game(LocalDateTime.of(2024, Month.JULY, 31, 18, 35), "Place de la Concorde 1", 0, 99.99, basketball, List.of(mens3x3)));
+        gameRepository.save(new Game(LocalDateTime.of(2024, Month.JULY, 30, 17, 30), "Place de la Concorde 1", 10, 99.99, basketball, List.of(mens3x3)));
+        gameRepository.save(new Game(LocalDateTime.of(2024, Month.JULY, 30, 18, 35), "Place de la Concorde 1", 44, 99.99, basketball, List.of(womens3x3)));
 
-
+        gameRepository.save(new Game(LocalDateTime.of(2024, Month.JULY, 27, 15, 40), "Vaires-sur-Marne Nautical Stadium", 0, 99.99, canoe, List.of(womensCanoeSlalom, mensCanoeSlalom)));
+        gameRepository.save(new Game(LocalDateTime.of(2024, Month.AUGUST, 8, 10, 30), "Vaires-sur-Marne Nautical Stadium", 1, 49.99, canoe, List.of(womensCanoeSprint, mensCanoeSprint)));
     }
-
-
 }

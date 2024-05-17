@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Getter
@@ -24,13 +25,17 @@ public class Discipline implements Serializable {
 
     private boolean gender;
 
-    @ManyToOne
-    @JoinColumn(name = "sportID")
-    private Sport sport;
+    @ManyToMany
+    @JoinTable(
+            name = "discipline/game",
+            joinColumns = @JoinColumn(name = "disciplineid"),
+            inverseJoinColumns = @JoinColumn(name = "gameid")
+    )
+    private List<Game> games;
 
-        public Discipline(String name, boolean gender, Sport sport) {
+
+        public Discipline(String name, boolean gender) {
         this.name = name;
         this.gender = gender;
-        this.sport = sport;
     }
 }

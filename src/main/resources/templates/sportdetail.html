@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Sport Details</title>
+    <link rel="stylesheet" type="text/css" href="/css/sportdetail.css">
+</head>
+<body>
+
+<header>
+    <a href="/olympics2024" class="btn" th:text="#{sport.home}"></a>
+    <h1 th:text="${sport.name}"></h1>
+    <th:block th:if="${#authorization.expression('hasRole(''USER'')')}">
+        <a href="/olympics2024/tickets" class="btn" th:text="#{home.ticketbutton}"></a>
+    </th:block>
+    <th:block th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
+        <a href="/olympics2024/tickets" class="btn" th:text="'+ ' + #{sport.addgame}"></a>
+    </th:block>
+</header>
+
+<div class="discipline-container">
+    <table>
+        <thead>
+        <tr>
+            <th th:text="#{sport.discipline}" />
+            <th th:text="#{sport.date}" />
+            <th th:text="#{sport.location}" />
+            <th th:text="#{sport.seats}" />
+            <th th:text="#{sport.price}" />
+        </tr>
+        </thead>
+        <tbody th:if="${not #lists.isEmpty(sport.games)}">
+        <tr th:each="game : ${sport.games}">
+            <td>
+                <ul>
+                    <li th:each="discipline : ${game.disciplines}">
+                        <span th:text="'⮕ ' + ${discipline.name} + ' (' + (${discipline.gender} ? 'Men' : 'Women') + ')'" />
+                    </li>
+                </ul>
+            </td>
+            <td class="center" th:text="${#temporals.format(game.date, #messages.msg('date.format.pattern'))}" />
+            <td class="center" th:text="${game.location}" />
+            <td class="center" th:text="${game.remainingSeats}" />
+            <td class="center" th:if="${#authorization.expression('hasRole(''ADMIN'')')}" th:text="'€' + ${#numbers.formatDecimal(game.ticketPrice, 0, 'DEFAULT', 2, 'POINT')}" />
+            <td class="center" th:if="${#authorization.expression('hasRole(''USER'')') and game.remainingSeats > 0}" th:text="'€' + ${#numbers.formatDecimal(game.ticketPrice, 0, 'DEFAULT', 2, 'POINT')}" />
+            <td class="center" th:if="${#authorization.expression('hasRole(''USER'')') and game.remainingSeats <= 0}" th:text="'-'" />
+        </tr>
+        </tbody>
+        <tbody th:if="${#lists.isEmpty(sport.games)}">
+        <tr>
+            <td colspan="5" class="center" th:text="#{sport.nogames}"/>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

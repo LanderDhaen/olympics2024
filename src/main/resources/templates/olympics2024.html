@@ -20,8 +20,8 @@
     </div>
     <ul class="sports-list">
         <li th:each="sport : ${sports}">
-            <a th:href="@{olympics2024/sports/{name}(name=${#strings.toLowerCase(sport.name)})}">
-                <span th:text="${sport.name}" /> (<span th:text="${#lists.size(sport.disciplines)}"/> <span th:text="#{home.disciplines}" />)
+            <a th:href="@{olympics2024/sport/{name}(name=${#strings.toLowerCase(sport.name)})}">
+                <span th:text="${sport.name}" /> (<span th:text="${#lists.size(sport.games)}"/> <span th:text="#{home.games}" />)
             </a>
         </li>
     </ul>

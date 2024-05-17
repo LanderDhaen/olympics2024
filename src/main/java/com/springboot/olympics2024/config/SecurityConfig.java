@@ -33,7 +33,8 @@ public class SecurityConfig{
                         requests.requestMatchers("/login**").permitAll()
                                 .requestMatchers("/css/**").permitAll()
                                 .requestMatchers("/accessdenied**").permitAll()
-                                .requestMatchers("/olympics2024").hasAnyRole("USER", "ADMIN"))
+                                .requestMatchers("/olympics2024").hasAnyRole("USER", "ADMIN")
+                                .requestMatchers("/olympics2024/sport/**").hasAnyRole("USER", "ADMIN"))
                 .formLogin(form ->
                         form
                                 .defaultSuccessUrl("/olympics2024", true)
