@@ -107,5 +107,6 @@ select {
 
 .required {
     color: red;
+    font-weight: bolder;
 }
 
