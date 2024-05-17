@@ -25,7 +25,7 @@ public class Sport implements Serializable {
 
 
     @OneToMany(mappedBy = "sport")
-    private List<Discipline> disciplines;
+    private List<Game> games;
 
     public Sport(String name) {
         this.name = name;

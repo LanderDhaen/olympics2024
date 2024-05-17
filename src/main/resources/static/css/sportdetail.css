@@ -13,7 +13,7 @@ body {
 header {
     background-color: #f8f8f8;
     color: #333;
-    padding: 20px 50px 50px 50px;
+    padding: 20px 50px 0px 50px;
     text-align: center;
     display: flex;
     justify-content: space-between;
@@ -40,13 +40,7 @@ h1, h2 {
 .discipline-container {
     display: flex;
     align-items: center;
-    padding: 0 50px 20px 50px;
-    gap: 20px;
-}
-
-.discipline-name {
-    flex: 1 1 10%;
-    font-weight: bold;
+    padding: 50px;
 }
 
 table {
@@ -58,13 +52,20 @@ table, th, td {
     border: 1px solid #ddd;
 }
 
-th, td {
+th {
+    padding: 8px;
+    text-align: center;
+    color: #fff;
+    background-color: #0056b3;
+}
+
+td {
     padding: 8px;
     text-align: left;
 }
 
-th {
-    background-color: #f4f4f4;
+td.remaining-seats, td.price {
+    text-align: center;
 }
 
 ul {

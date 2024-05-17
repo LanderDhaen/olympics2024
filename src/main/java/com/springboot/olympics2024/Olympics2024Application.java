@@ -9,8 +9,6 @@ import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
-import service.DisciplineService;
-import service.DisciplineServiceImpl;
 import service.SpectatorDetailsService;
 import service.SportService;
 import service.SportServiceImpl;
@@ -40,11 +38,6 @@ public class Olympics2024Application implements WebMvcConfigurer {
     @Bean
     SportService sportService() {
         return new SportServiceImpl();
-    }
-
-    @Bean
-    DisciplineService disciplineService() {
-        return new DisciplineServiceImpl();
     }
 
     @Bean

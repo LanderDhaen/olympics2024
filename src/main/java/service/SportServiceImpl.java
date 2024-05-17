@@ -25,9 +25,7 @@ public class SportServiceImpl implements SportService {
 
         Sport sport = sportRepository.findByName(name);
 
-        for(Discipline discipline : sport.getDisciplines()) {
-            discipline.getGames().sort(Comparator.comparing(Game::getDate));
-        }
+        sport.getGames().sort(Comparator.comparing(Game::getDate));
 
         return sport;
     }

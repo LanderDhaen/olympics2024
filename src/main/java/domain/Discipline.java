@@ -25,16 +25,17 @@ public class Discipline implements Serializable {
 
     private boolean gender;
 
-    @OneToMany(mappedBy = "discipline")
+    @ManyToMany
+    @JoinTable(
+            name = "discipline/game",
+            joinColumns = @JoinColumn(name = "disciplineid"),
+            inverseJoinColumns = @JoinColumn(name = "gameid")
+    )
     private List<Game> games;
 
-    @ManyToOne
-    @JoinColumn(name = "sportID")
-    private Sport sport;
 
-        public Discipline(String name, boolean gender, Sport sport) {
+        public Discipline(String name, boolean gender) {
         this.name = name;
         this.gender = gender;
-        this.sport = sport;
     }
 }

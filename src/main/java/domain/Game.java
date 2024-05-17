@@ -8,6 +8,7 @@ import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Getter
@@ -29,15 +30,24 @@ public class Game implements Serializable {
 
     private double ticketPrice;
 
-    @ManyToOne
-    @JoinColumn(name = "disciplineID")
-    private Discipline discipline;
+    @ManyToMany
+    @JoinTable(
+            name = "discipline/game",
+            joinColumns = @JoinColumn(name = "gameid"),
+            inverseJoinColumns = @JoinColumn(name = "disciplineid")
+    )
+    private List<Discipline> disciplines;
 
-    public Game(LocalDateTime  date, String location, int remainingSeats, double ticketPrice, Discipline discipline) {
+    @ManyToOne
+    @JoinColumn(name = "sportID")
+    private Sport sport;
+
+    public Game(LocalDateTime  date, String location, int remainingSeats, double ticketPrice, Sport sport, List<Discipline> disciplines) {
         this.date = date;
         this.location = location;
         this.remainingSeats = remainingSeats;
         this.ticketPrice = ticketPrice;
-        this.discipline = discipline;
+        this.sport = sport;
+        this.disciplines = disciplines;
     }
 }
