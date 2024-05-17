@@ -8,13 +8,13 @@
 <body>
 
 <header>
-        <a href="/olympics2024" class="btn" th:text="#{sport.home}"/>
-        <h1 th:text="${sport.name}"/>
+    <a href="/olympics2024" class="btn" th:text="#{sport.home}"></a>
+    <h1 th:text="${sport.name}"></h1>
     <th:block th:if="${#authorization.expression('hasRole(''USER'')')}">
-        <a href="/olympics2024/tickets" class="btn" th:text="#{home.ticketbutton}"/>
+        <a href="/olympics2024/tickets" class="btn" th:text="#{home.ticketbutton}"></a>
     </th:block>
     <th:block th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
-        <a href="/olympics2024/tickets" class="btn" th:text="'+ ' + #{sport.addgame}"/>
+        <a href="/olympics2024/tickets" class="btn" th:text="'+ ' + #{sport.addgame}"></a>
     </th:block>
 </header>
 
@@ -29,7 +29,7 @@
             <th th:text="#{sport.price}" />
         </tr>
         </thead>
-        <tbody>
+        <tbody th:if="${not #lists.isEmpty(sport.games)}">
         <tr th:each="game : ${sport.games}">
             <td>
                 <ul>
@@ -38,12 +38,17 @@
                     </li>
                 </ul>
             </td>
-            <td th:text="${#temporals.format(game.date, #messages.msg('date.format.pattern'))}" />
-            <td th:text="${game.location}" />
-            <td class="remaining-seats" th:text="${game.remainingSeats}" />
-            <td class="price" th:if="${#authorization.expression('hasRole(''ADMIN'')')}" th:text="'€' + ${#numbers.formatDecimal(game.ticketPrice, 0, 'DEFAULT', 2, 'POINT')}" />
-            <td class="price" th:if="${#authorization.expression('hasRole(''USER'')') and game.remainingSeats > 0}" th:text="'€' + ${#numbers.formatDecimal(game.ticketPrice, 0, 'DEFAULT', 2, 'POINT')}" />
-            <td class="price" th:if="${#authorization.expression('hasRole(''USER'')') and game.remainingSeats <= 0}" th:text="'-'" />
+            <td class="center" th:text="${#temporals.format(game.date, #messages.msg('date.format.pattern'))}" />
+            <td class="center" th:text="${game.location}" />
+            <td class="center" th:text="${game.remainingSeats}" />
+            <td class="center" th:if="${#authorization.expression('hasRole(''ADMIN'')')}" th:text="'€' + ${#numbers.formatDecimal(game.ticketPrice, 0, 'DEFAULT', 2, 'POINT')}" />
+            <td class="center" th:if="${#authorization.expression('hasRole(''USER'')') and game.remainingSeats > 0}" th:text="'€' + ${#numbers.formatDecimal(game.ticketPrice, 0, 'DEFAULT', 2, 'POINT')}" />
+            <td class="center" th:if="${#authorization.expression('hasRole(''USER'')') and game.remainingSeats <= 0}" th:text="'-'" />
+        </tr>
+        </tbody>
+        <tbody th:if="${#lists.isEmpty(sport.games)}">
+        <tr>
+            <td colspan="5" class="center" th:text="#{sport.nogames}"/>
         </tr>
         </tbody>
     </table>
