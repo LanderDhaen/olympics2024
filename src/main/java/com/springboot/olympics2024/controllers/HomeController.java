@@ -22,5 +22,4 @@ public class HomeController {
 
        return "olympics2024";
     }
-
 }

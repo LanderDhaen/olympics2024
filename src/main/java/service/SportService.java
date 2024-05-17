@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface SportService {
     List<Sport> findAllSports();
+    Sport findByName(String name);
 }

@@ -17,4 +17,8 @@ public class SportServiceImpl implements SportService {
     public List<Sport> findAllSports() {
         return sportRepository.findAll();
     }
+
+    public Sport findByName(String name) {
+        return sportRepository.findByName(name);
+    }
 }
