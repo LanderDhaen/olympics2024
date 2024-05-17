@@ -10,7 +10,6 @@ import lombok.Setter;
 import validator.ValidDate;
 import validator.ValidOlympicNumber1;
 import validator.ValidOlympicNumber2;
-import validator.ValidTicketPrice;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -48,8 +47,9 @@ public class Game implements Serializable {
     private int remainingSeats;
 
     @NotNull
-    @ValidTicketPrice
-    private double ticketPrice;
+    @DecimalMin(value = "0", inclusive = false, message = "{validator.validPrice.min}")
+    @DecimalMax(value = "150", inclusive = false, message = "{validator.validPrice.max}")
+    private Double ticketPrice;
 
     @ManyToMany
     @JoinTable(
