@@ -31,16 +31,15 @@ public class GameController {
     @GetMapping("/games/create/{name}")
     public String showForm(@PathVariable("name") String name, Model model) {
 
-        Sport sport = sportService.findByName(name);
-
-        model.addAttribute("game", new Game(sport));
-        model.addAttribute("sport", sport);
+        model.addAttribute("game", new Game());
+        model.addAttribute("sport", name);
 
         return "gameform";
     }
 
     @PostMapping("/games/create/{name}")
     public String addGame(@Valid Game game, BindingResult result, @PathVariable("name") String name, Model model) {
+
 
         olympicNumberValidator.validate(game, result);
 
@@ -49,6 +48,11 @@ public class GameController {
             model.addAttribute("sport", sport);
             return "gameform";
         }
+
+        Sport sport = sportService.findByName(name);
+        game.setSport(sport);
+
+        gameService.save(game);
 
         return "redirect:/olympics2024/sports/{name}";
 

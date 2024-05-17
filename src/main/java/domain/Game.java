@@ -16,7 +16,7 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor(access = AccessLevel.PUBLIC)
 
 public class Game implements Serializable {
 
@@ -58,10 +58,6 @@ public class Game implements Serializable {
     @ManyToOne
     @JoinColumn(name = "sportID")
     private Sport sport;
-
-    public Game(Sport sport) {
-        this.sport = sport;
-    }
 
     public Game(LocalDateTime date, String location, int olympicNumber1, int olympicNumber2, int remainingSeats, double ticketPrice, List<Discipline> disciplines, Sport sport) {
         this.date = date;

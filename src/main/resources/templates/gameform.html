@@ -11,7 +11,7 @@
     <a href="/olympics2024" class="btn" th:text="#{sport.home}"></a>
 </header>
 <div class="form-container">
-    <form th:action="@{/olympics2024/games/create/{name}(name=${#strings.toLowerCase(sport.name)})}" th:object="${game}" method="post" class="form">
+    <form th:action="@{/olympics2024/games/create/{name}(name=${#strings.toLowerCase(sport)})}" th:object="${game}" method="post" class="form">
         <div class="form-group">
             <div class="form-input">
                 <label for="date" class="label-container">Datum en aanvangsuur: <span class="required">*</span></label>
