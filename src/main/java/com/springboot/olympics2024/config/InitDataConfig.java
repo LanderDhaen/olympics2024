@@ -75,10 +75,9 @@ public class InitDataConfig implements CommandLineRunner {
 
         // Seeding the database with games
 
+        gameRepository.save(new Game(LocalDateTime.of(2024, Month.JULY, 30, 19, 40), "Place de la Concorde 1", 0, 99.99, mens3x3));
         gameRepository.save(new Game(LocalDateTime.of(2024, Month.JULY, 30, 17, 30), "Place de la Concorde 1", 10, 99.99, mens3x3));
         gameRepository.save(new Game(LocalDateTime.of(2024, Month.JULY, 30, 18, 35), "Place de la Concorde 1", 44, 99.99, womens3x3));
-        gameRepository.save(new Game(LocalDateTime.of(2024, Month.JULY, 30, 19, 40), "Place de la Concorde 1", 0, 99.99, mens3x3));
-
 
     }
 
