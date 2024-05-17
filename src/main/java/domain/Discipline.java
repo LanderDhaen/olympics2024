@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Getter
@@ -23,6 +24,9 @@ public class Discipline implements Serializable {
     private String name;
 
     private boolean gender;
+
+    @OneToMany(mappedBy = "discipline")
+    private List<Game> games;
 
     @ManyToOne
     @JoinColumn(name = "sportID")
