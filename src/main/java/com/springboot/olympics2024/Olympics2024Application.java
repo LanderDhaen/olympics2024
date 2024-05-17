@@ -45,6 +45,11 @@ public class Olympics2024Application implements WebMvcConfigurer {
     }
 
     @Bean
+    StadiumService stadiumService() {
+        return new StadiumServiceImpl();
+    }
+
+    @Bean
     OlympicNumberValidator olympicNumberValidator() {
         return new OlympicNumberValidator();
     }

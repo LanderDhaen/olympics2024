@@ -23,9 +23,4 @@ public class GameServiceImpl implements GameService {
     public void save(Game game) {
         gameRepository.save(game);
     }
-
-    @Override
-    public Set<String> findAllLocationsBySport(Long sportId) {
-        return gameRepository.findLocationBySportId(sportId);
-    }
 }

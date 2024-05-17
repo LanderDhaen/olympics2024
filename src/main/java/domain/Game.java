@@ -30,17 +30,14 @@ public class Game implements Serializable {
     private LocalDateTime date;
 
     @NotNull
-    private String location;
-
-    @NotNull
     private int olympicNumber1;
 
     @NotNull
     private int olympicNumber2;
 
     @NotNull(message = "{validator.emptyInput}")
-    @Min(value = 1, message = "{validator.validSeats.min}")
-    @Max(value = 49, message = "{validator.validSeats.max}")
+    @Min(value = 0, message = "{validator.validSeats.min}")
+    @Max(value = 50, message = "{validator.validSeats.max}")
     private int remainingSeats;
 
     @NotNull
@@ -60,14 +57,21 @@ public class Game implements Serializable {
     @JoinColumn(name = "sportID")
     private Sport sport;
 
-    public Game(LocalDateTime date, String location, int olympicNumber1, int olympicNumber2, int remainingSeats, double ticketPrice, List<Discipline> disciplines, Sport sport) {
+    @NotNull
+    @ManyToOne
+    @JoinColumn(name = "stadiumID")
+    private Stadium stadium;
+
+    public Game(LocalDateTime date, int olympicNumber1, int olympicNumber2, int remainingSeats, Double ticketPrice, List<Discipline> disciplines, Stadium stadium, Sport sport) {
         this.date = date;
-        this.location = location;
         this.olympicNumber1 = olympicNumber1;
         this.olympicNumber2 = olympicNumber2;
         this.remainingSeats = remainingSeats;
         this.ticketPrice = ticketPrice;
         this.disciplines = disciplines;
+        this.stadium = stadium;
         this.sport = sport;
     }
 }
+
+

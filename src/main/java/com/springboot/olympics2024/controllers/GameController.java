@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import service.GameService;
 import service.SportService;
+import service.StadiumService;
 import validator.OlympicNumberValidator;
 
 @Controller
@@ -26,18 +27,17 @@ public class GameController {
     private GameService gameService;
 
     @Autowired
+    private StadiumService stadiumService;
+
+    @Autowired
     private OlympicNumberValidator olympicNumberValidator;
 
     @GetMapping("/games/create/{name}")
     public String showForm(@PathVariable("name") String name, Model model) {
 
-        Sport sport = sportService.findByName(name);
-
-        gameService.findAllLocationsBySport(sport.getId());
-
         model.addAttribute("game", new Game());
-        model.addAttribute("sport", sport);
-        model.addAttribute("locations", gameService.findAllLocationsBySport(sport.getId()));
+        model.addAttribute("sport", name);
+        model.addAttribute("stadiums", stadiumService.findAllStadiums());
 
         return "gameform";
     }
