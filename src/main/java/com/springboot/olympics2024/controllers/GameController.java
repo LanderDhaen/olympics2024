@@ -31,8 +31,13 @@ public class GameController {
     @GetMapping("/games/create/{name}")
     public String showForm(@PathVariable("name") String name, Model model) {
 
+        Sport sport = sportService.findByName(name);
+
+        gameService.findAllLocationsBySport(sport.getId());
+
         model.addAttribute("game", new Game());
-        model.addAttribute("sport", name);
+        model.addAttribute("sport", sport);
+        model.addAttribute("locations", gameService.findAllLocationsBySport(sport.getId()));
 
         return "gameform";
     }

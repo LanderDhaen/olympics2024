@@ -11,7 +11,7 @@
     <a href="/olympics2024" class="btn" th:text="#{sport.home}"></a>
 </header>
 <div class="form-container">
-    <form th:action="@{/olympics2024/games/create/{name}(name=${#strings.toLowerCase(sport)})}" th:object="${game}" method="post" class="form">
+    <form th:action="@{/olympics2024/games/create/{name}(name=${#strings.toLowerCase(sport.name)})}" th:object="${game}" method="post" class="form">
         <div class="form-group">
             <div class="form-input">
                 <div class="label-container">
@@ -26,10 +26,8 @@
                 <div class="label-container">
                     <label for="stadium" th:text="#{gameform.stadium}">Stadium Name:</label><span class="required">*</span>
                 </div>
-                <select id="stadium" name="stadium" class="input-container">
-                    <option value="stadium1">Stadium 1</option>
-                    <option value="stadium2">Stadium 2</option>
-                    <!-- Add more stadium options as needed -->
+                <select id="stadium" th:field="*{location}" class="input-container">
+                    <option th:each="location : ${locations}" th:value="${location}" th:text="${location}"></option>
                 </select>
             </div>
         </div>

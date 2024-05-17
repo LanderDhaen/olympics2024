@@ -54,7 +54,7 @@ h1, h2 {
     justify-content: center;
     flex-direction: column;
     gap: 10px;
-    width: 40%;
+    width: 50%;
 }
 
 .form-group {
@@ -103,6 +103,17 @@ select {
     border-radius: 5px;
     box-sizing: border-box;
     width: 100%;
+    background-color: #fff;
+    color: #333;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+input[type="datetime-local"]:focus,
+input[type="number"]:focus,
+input[type="text"]:focus {
+    border-color: #0056b3;
 }
 
 .required {

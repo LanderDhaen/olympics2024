@@ -29,6 +29,7 @@ public class Game implements Serializable {
     @ValidDate
     private LocalDateTime date;
 
+    @NotNull
     private String location;
 
     @NotNull
