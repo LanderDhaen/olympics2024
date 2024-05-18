@@ -26,19 +26,20 @@ public class Game implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull(message = "{validator.emptyInput}")
     @ValidDate
     private LocalDateTime date;
 
-    @NotNull
+    @NotNull(message = "{validator.emptyInput}")
     private int olympicNumber1;
 
-    @NotNull
+    @NotNull(message = "{validator.emptyInput}")
     private int olympicNumber2;
 
-    @NotNull
+    @NotNull(message = "{validator.emptyInput}")
     private int remainingSeats;
 
-    @NotNull
+    @NotNull(message = "{validator.emptyInput}")
     @DecimalMin(value = "0", inclusive = false, message = "{validator.validPrice.min}")
     @DecimalMax(value = "150", inclusive = false, message = "{validator.validPrice.max}")
     private Double ticketPrice;
@@ -51,12 +52,12 @@ public class Game implements Serializable {
     )
     private List<Discipline> disciplines;
 
-    @NotNull
+    @NotNull(message = "{validator.emptyInput}")
     @ManyToOne
     @JoinColumn(name = "sportID")
     private Sport sport;
 
-    @NotNull
+    @NotNull(message = "{validator.emptyInput}")
     @ManyToOne
     @JoinColumn(name = "stadiumID")
     private Stadium stadium;

@@ -52,7 +52,7 @@
                 <div class="label-container">
                     <label for="olympicNumber1" class="label-container" th:text="#{gameform.olympicNumber1}">Olympic Number 1:</label><span class="required">*</span>
                 </div>
-                <input type="number" id="olympicNumber1" name="olympicNumber1" pattern="[0-9]{5}" th:field="*{olympicNumber1}" class="input-container">
+                <input type="number" id="olympicNumber1" name="olympicNumber1" th:field="*{olympicNumber1}" class="input-container">
             </div>
             <div class="error-msg" th:if="${#fields.hasErrors('olympicNumber1')}" th:errors="*{olympicNumber1}"></div>
         </div>
@@ -61,7 +61,7 @@
                 <div class="label-container">
                     <label for="olympicNumber2" th:text="#{gameform.olympicNumber2}">Olympic Number 2:</label><span class="required">*</span>
                 </div>
-                <input type="number" id="olympicNumber2" name="olympicNumber2" pattern="[0-9]{5}" th:field="*{olympicNumber2}" class="input-container">
+                <input type="number" id="olympicNumber2" name="olympicNumber2" th:field="*{olympicNumber2}" class="input-container">
             </div>
             <div class="error-msg" th:if="${#fields.hasErrors('olympicNumber2')}" th:errors="*{olympicNumber2}"></div>
         </div>
