@@ -11,6 +11,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import service.*;
 import validator.OlympicNumberValidator;
+import validator.RemainingSeatsValidator;
 
 import java.util.Locale;
 
@@ -52,6 +53,11 @@ public class Olympics2024Application implements WebMvcConfigurer {
     @Bean
     OlympicNumberValidator olympicNumberValidator() {
         return new OlympicNumberValidator();
+    }
+
+    @Bean
+    RemainingSeatsValidator remainingSeatsValidator() {
+        return new RemainingSeatsValidator();
     }
 
     @Bean

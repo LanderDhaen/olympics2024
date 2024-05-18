@@ -35,9 +35,7 @@ public class Game implements Serializable {
     @NotNull
     private int olympicNumber2;
 
-    @NotNull(message = "{validator.emptyInput}")
-    @Min(value = 0, message = "{validator.validSeats.min}")
-    @Max(value = 50, message = "{validator.validSeats.max}")
+    @NotNull
     private int remainingSeats;
 
     @NotNull
@@ -53,6 +51,7 @@ public class Game implements Serializable {
     )
     private List<Discipline> disciplines;
 
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "sportID")
     private Sport sport;
