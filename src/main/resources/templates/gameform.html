@@ -26,8 +26,8 @@
                 <div class="label-container">
                     <label for="stadium" th:text="#{gameform.stadium}">Stadium Name:</label><span class="required">*</span>
                 </div>
-                <select id="stadium" th:field="*{stadium}" class="input-container">
-                    <option th:each="stadium : ${stadiums}" th:value="${stadium}" th:text="${stadium.name} + ' (' +${stadium.capacity} + ' ' + #{gameform.seats} +')'"></option>
+                <select id="stadium" th:field="*{stadium.id}" class="input-container">
+                    <option th:each="stadium : ${stadiums}" th:value="${stadium.id}" th:text="${stadium.name} + ' (' +${stadium.capacity} + ' ' + #{gameform.seats} +')'"></option>
                 </select>
             </div>
         </div>

@@ -15,6 +15,9 @@ import service.GameService;
 import service.SportService;
 import service.StadiumService;
 import validator.OlympicNumberValidator;
+import validator.RemainingSeatsValidator;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/olympics2024")
@@ -31,13 +34,15 @@ public class GameController {
 
     @Autowired
     private OlympicNumberValidator olympicNumberValidator;
+    @Autowired
+    private RemainingSeatsValidator remainingSeatsValidator;
 
     @GetMapping("/games/create/{name}")
     public String showForm(@PathVariable("name") String name, Model model) {
 
-        model.addAttribute("game", new Game());
         model.addAttribute("sport", name);
         model.addAttribute("stadiums", stadiumService.findAllStadiums());
+        model.addAttribute("game", new Game());
 
         return "gameform";
     }
@@ -45,12 +50,12 @@ public class GameController {
     @PostMapping("/games/create/{name}")
     public String addGame(@Valid Game game, BindingResult result, @PathVariable("name") String name, Model model) {
 
-
         olympicNumberValidator.validate(game, result);
+        remainingSeatsValidator.validate(game, result);
 
         if (result.hasErrors()) {
-            Sport sport = sportService.findByName(name);
-            model.addAttribute("sport", sport);
+            model.addAttribute("sport", name);
+            model.addAttribute("stadiums", stadiumService.findAllStadiums());
             return "gameform";
         }
 
