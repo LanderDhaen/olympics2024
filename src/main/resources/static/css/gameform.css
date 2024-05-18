@@ -61,7 +61,7 @@ h1, h2 {
     justify-content: center;
     flex-direction: column;
     gap: 10px;
-    width: 50%;
+    width: 40%;
 }
 
 .form-group {
@@ -91,7 +91,7 @@ h1, h2 {
 
 .error-msg {
     display: flex;
-    justify-content: center;
+    justify-content: end;
     width: 100%;
     color: red;
     padding-bottom: 10px;
