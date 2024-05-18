@@ -54,13 +54,12 @@ public class Game implements Serializable {
 
     @NotNull(message = "{validator.emptyInput}")
     @ManyToOne
-    @JoinColumn(name = "sportID")
-    private Sport sport;
-
-    @NotNull(message = "{validator.emptyInput}")
-    @ManyToOne
     @JoinColumn(name = "stadiumID")
     private Stadium stadium;
+
+    @ManyToOne
+    @JoinColumn(name = "sportID")
+    private Sport sport;
 
     public Game(LocalDateTime date, int olympicNumber1, int olympicNumber2, int remainingSeats, Double ticketPrice, List<Discipline> disciplines, Stadium stadium, Sport sport) {
         this.date = date;

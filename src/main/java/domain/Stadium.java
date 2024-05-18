@@ -1,9 +1,6 @@
 package domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,8 +16,8 @@ public class Stadium implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue
-    private long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private String name;
 
@@ -38,5 +35,14 @@ public class Stadium implements Serializable {
     public Stadium(String name, int capacity) {
         this.name = name;
         this.capacity = capacity;
+    }
+
+    @Override
+    public String toString() {
+        return "Stadium{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", capacity=" + capacity +
+                '}';
     }
 }
