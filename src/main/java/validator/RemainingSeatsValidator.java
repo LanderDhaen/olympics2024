@@ -21,8 +21,6 @@ public class RemainingSeatsValidator implements Validator {
         int remainingSeats = game.getRemainingSeats();
         int capacity = game.getStadium().getCapacity();
 
-        System.out.println(capacity);
-
         if (remainingSeats < MIN || remainingSeats > MAX) {
             errors.rejectValue("remainingSeats", "validator.validSeats.range", new Object[]{MIN, MAX}, "validator.validSeats.default");
         }

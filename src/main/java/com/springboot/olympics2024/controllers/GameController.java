@@ -53,18 +53,10 @@ public class GameController {
     @PostMapping("/games/create/{name}")
     public String addGame(@Valid Game game, BindingResult result, @PathVariable("name") String name, Model model) {
 
-        System.out.println(game.getStadium().toString());
-
         olympicNumberValidator.validate(game, result);
         remainingSeatsValidator.validate(game, result);
 
         if (result.hasErrors()) {
-
-            result.getAllErrors().forEach(error ->
-            {
-                System.out.println(error.toString());
-            });
-
             model.addAttribute("sport", name);
             model.addAttribute("stadiums", stadiumService.findAllStadiums());
             return "gameform";
