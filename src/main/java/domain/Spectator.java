@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.List;
 
 import util.Role;
 
@@ -29,6 +30,9 @@ public class Spectator implements Serializable {
 
     @Enumerated(EnumType.STRING)
     private Role role;
+
+    @OneToMany(mappedBy = "spectator")
+    private List<Ticket> tickets;
 
     public Spectator(String username, String password, Role role) {
         this.username = username;
