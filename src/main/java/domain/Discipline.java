@@ -25,6 +25,9 @@ public class Discipline implements Serializable {
 
     private boolean gender;
 
+    @ManyToOne
+    private Sport sport;
+
     @ManyToMany
     @JoinTable(
             name = "discipline/game",
@@ -34,8 +37,9 @@ public class Discipline implements Serializable {
     private List<Game> games;
 
 
-        public Discipline(String name, boolean gender) {
+        public Discipline(String name, boolean gender, Sport sport) {
         this.name = name;
         this.gender = gender;
+        this.sport = sport;
     }
 }

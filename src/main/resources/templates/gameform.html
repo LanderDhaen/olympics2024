@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/css/gameform.css">
+    <title th:text="#{gameform.title}">Add Game</title>
+</head>
+<body>
+<header>
+    <a href="/olympics2024" class="btn" th:text="#{sport.home}"></a>
+</header>
+<div class="form-container">
+    <form th:action="@{/olympics2024/games/create/{name}(name=${#strings.toLowerCase(sport)})}" th:object="${game}" method="post" class="form">
+        <div class="form-group">
+            <div class="form-input">
+                <div class="label-container">
+                    <label for="date" th:text="#{gameform.date}">Date and Time: </label><span class="required">*</span>
+                </div>
+                <input type="datetime-local" id="date" th:field="*{date}" class="input-container">
+            </div>
+            <div class="error-msg" th:if="${#fields.hasErrors('date')}" th:errors="*{date}"></div>
+        </div>
+        <div class="form-group">
+            <div class="form-input">
+                <div class="label-container">
+                    <label for="stadium" th:text="#{gameform.stadium}">Stadium Name:</label><span class="required">*</span>
+                </div>
+                <select id="stadium" th:field="*{stadium}" class="input-container">
+                    <option th:each="stadium : ${stadiums}" th:value="${stadium.id}" th:text="${stadium.name} + ' (' +${stadium.capacity} + ' ' + #{gameform.seats} +')'"></option>
+                </select>
+            </div>
+            <div class="error-msg" th:if="${#fields.hasErrors('stadium')}" th:errors="*{stadium}"></div>
+        </div>
+        <div class="form-group">
+            <div class="form-input">
+                <div class="label-container">
+                    <label th:text="#{gameform.disciplines}">Disciplines:</label>
+                </div>
+                <div class="input-container">
+                    <div class="discipline-container" th:each="discipline : ${disciplines}">
+                        <input type="checkbox" th:id="'discipline-' + ${discipline.id}" th:name="disciplines" th:value="${discipline.id}">
+                        <label th:for="'discipline-' + ${discipline.id}" th:text="${discipline.name} + ' (' + (${discipline.gender} ? 'Men' : 'Women') + ')'"></label>
+                    </div>
+                </div>
+            </div>
+            <div class="error-msg" th:if="${#fields.hasErrors('disciplines')}" th:errors="*{disciplines}"></div>
+        </div>
+        <div class="form-group">
+            <div class="form-input">
+                <div class="label-container">
+                    <label for="olympicNumber1" class="label-container" th:text="#{gameform.olympicNumber1}">Olympic Number 1:</label><span class="required">*</span>
+                </div>
+                <input type="number" id="olympicNumber1" name="olympicNumber1" th:field="*{olympicNumber1}" class="input-container">
+            </div>
+            <div class="error-msg" th:if="${#fields.hasErrors('olympicNumber1')}" th:errors="*{olympicNumber1}"></div>
+        </div>
+        <div class="form-group">
+            <div class="form-input">
+                <div class="label-container">
+                    <label for="olympicNumber2" th:text="#{gameform.olympicNumber2}">Olympic Number 2:</label><span class="required">*</span>
+                </div>
+                <input type="number" id="olympicNumber2" name="olympicNumber2" th:field="*{olympicNumber2}" class="input-container">
+            </div>
+            <div class="error-msg" th:if="${#fields.hasErrors('olympicNumber2')}" th:errors="*{olympicNumber2}"></div>
+        </div>
+        <div class="form-group">
+            <div class="form-input">
+                <div class="label-container">
+                    <label for="ticketPrice" th:text="#{gameform.ticketPrice}">Ticket Price:</label><span class="required">*</span>
+                </div>
+                <input type="number" id="ticketPrice" name="ticketPrice" step="0.01" th:field="*{ticketPrice}" class="input-container">
+            </div>
+            <div class="error-msg" th:if="${#fields.hasErrors('ticketPrice')}" th:errors="*{ticketPrice}"></div>
+        </div>
+        <div class="form-group">
+            <div class="form-input">
+                <div class="label-container">
+                    <label for="remainingSeats" th:text="#{gameform.remainingSeats}"></label><span class="required">*</span>
+                </div>
+                <input type="number" id="remainingSeats" name="remainingSeats" th:field="*{remainingSeats}" class="input-container">
+            </div>
+            <div class="error-msg" th:if="${#fields.hasErrors('remainingSeats')}" th:errors="*{remainingSeats}"></div>
+        </div>
+        <div class="btn-container">
+            <button class="btn" type="submit" th:text="#{gameform.submit}">Submit</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>

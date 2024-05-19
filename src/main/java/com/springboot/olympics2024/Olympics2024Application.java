@@ -9,9 +9,9 @@ import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
-import service.SpectatorDetailsService;
-import service.SportService;
-import service.SportServiceImpl;
+import service.*;
+import validator.OlympicNumberValidator;
+import validator.RemainingSeatsValidator;
 
 import java.util.Locale;
 
@@ -38,6 +38,26 @@ public class Olympics2024Application implements WebMvcConfigurer {
     @Bean
     SportService sportService() {
         return new SportServiceImpl();
+    }
+
+    @Bean
+    GameService gameService() {
+        return new GameServiceImpl();
+    }
+
+    @Bean
+    StadiumService stadiumService() {
+        return new StadiumServiceImpl();
+    }
+
+    @Bean
+    OlympicNumberValidator olympicNumberValidator() {
+        return new OlympicNumberValidator();
+    }
+
+    @Bean
+    RemainingSeatsValidator remainingSeatsValidator() {
+        return new RemainingSeatsValidator();
     }
 
     @Bean
