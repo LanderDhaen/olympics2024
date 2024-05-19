@@ -43,7 +43,10 @@ public class GameController {
     @GetMapping("/games/create/{name}")
     public String showForm(@PathVariable("name") String name, Model model) {
 
-        model.addAttribute("sport", name);
+        Sport sport = sportService.findByName(name);
+
+        model.addAttribute("sport", sport.getName());
+        model.addAttribute("disciplines", sport.getDisciplines());
         model.addAttribute("stadiums", stadiumService.findAllStadiums());
         model.addAttribute("game", new Game());
 
@@ -56,13 +59,15 @@ public class GameController {
         olympicNumberValidator.validate(game, result);
         remainingSeatsValidator.validate(game, result);
 
+        Sport sport = sportService.findByName(name);
+
         if (result.hasErrors()) {
-            model.addAttribute("sport", name);
+            model.addAttribute("sport", sport.getName());
+            model.addAttribute("disciplines", sport.getDisciplines());
             model.addAttribute("stadiums", stadiumService.findAllStadiums());
             return "gameform";
         }
 
-        Sport sport = sportService.findByName(name);
         game.setSport(sport);
 
         gameService.save(game);
