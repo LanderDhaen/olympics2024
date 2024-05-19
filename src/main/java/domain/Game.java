@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import jakarta.persistence.*;
 import lombok.Setter;
 import validator.ValidDate;
+import validator.ValidDisciplines;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -44,6 +45,7 @@ public class Game implements Serializable {
     @DecimalMax(value = "150", inclusive = false, message = "{validator.validPrice.max}")
     private Double ticketPrice;
 
+    @ValidDisciplines(max = 2)
     @ManyToMany
     @JoinTable(
             name = "discipline/game",
