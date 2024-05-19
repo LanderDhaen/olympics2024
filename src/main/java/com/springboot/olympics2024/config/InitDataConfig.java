@@ -53,27 +53,27 @@ public class InitDataConfig implements CommandLineRunner {
 
         // Seeding database with disciplines
 
-        disciplineRepository.save(new Discipline("400m Freestyle", true));
-        disciplineRepository.save(new Discipline("50m Breaststroke", false));
+        disciplineRepository.save(new Discipline("400m Freestyle", true, swimming));
+        disciplineRepository.save(new Discipline("50m Breaststroke", false, swimming));
 
-        disciplineRepository.save(new Discipline("Seniors", true));
-        disciplineRepository.save(new Discipline("Seniors", false));
+        disciplineRepository.save(new Discipline("Seniors", true, waterpolo));
+        disciplineRepository.save(new Discipline("Seniors", false, waterpolo));
 
-        disciplineRepository.save(new Discipline("Sevens", true));
-        disciplineRepository.save(new Discipline("Sevens", false));
+        disciplineRepository.save(new Discipline("Sevens", true, rugby));
+        disciplineRepository.save(new Discipline("Sevens", false, rugby));
 
-        Discipline mens3x3 = disciplineRepository.save(new Discipline("3x3", true));
-        Discipline womens3x3 = disciplineRepository.save(new Discipline("3x3", false));
+        Discipline mens3x3 = disciplineRepository.save(new Discipline("3x3", true, basketball));
+        Discipline womens3x3 = disciplineRepository.save(new Discipline("3x3", false, basketball));
 
-        disciplineRepository.save(new Discipline("Road", true));
-        disciplineRepository.save(new Discipline("Road", false));
-        disciplineRepository.save(new Discipline("Track", true));
-        disciplineRepository.save(new Discipline("Track", false));
+        disciplineRepository.save(new Discipline("Road", true, cycling));
+        disciplineRepository.save(new Discipline("Road", false, cycling));
+        disciplineRepository.save(new Discipline("Track", true, cycling));
+        disciplineRepository.save(new Discipline("Track", false, cycling));
 
-        Discipline mensCanoeSlalom = disciplineRepository.save(new Discipline("Canoe Single Slalom", true));
-        Discipline womensCanoeSlalom = disciplineRepository.save(new Discipline("Canoe Single Slalom", false));
-        Discipline mensCanoeSprint = disciplineRepository.save(new Discipline("Canoe Single 200m", true));
-        Discipline womensCanoeSprint = disciplineRepository.save(new Discipline("Canoe Single 200m", false));
+        Discipline mensCanoeSlalom = disciplineRepository.save(new Discipline("Canoe Single Slalom", true, canoe));
+        Discipline womensCanoeSlalom = disciplineRepository.save(new Discipline("Canoe Single Slalom", false, canoe));
+        Discipline mensCanoeSprint = disciplineRepository.save(new Discipline("Canoe Single 200m", true, canoe));
+        Discipline womensCanoeSprint = disciplineRepository.save(new Discipline("Canoe Single 200m", false, canoe));
 
         // Seeding the database with games
     /*
