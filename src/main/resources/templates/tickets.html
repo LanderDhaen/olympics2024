@@ -2,13 +2,15 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
-    <title>Sport Details</title>
+    <title>Olympics 2024</title>
     <link rel="stylesheet" type="text/css" href="/css/tickets.css">
 </head>
 <body>
 
 <header>
     <a href="/olympics2024" class="btn" th:text="#{sport.home}"></a>
+    <h1 th:text="#{ticket.header}"></h1>
+    <a href="/login?logout" class="btn" th:text="#{home.logout}"/>
 </header>
 
 <div class="tickets-container">
