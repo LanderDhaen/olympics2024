@@ -4,11 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="/css/gameform.css">
-    <title th:text="#{gameform.title}">Add Game</title>
+    <title>Olympics 2024</title>
 </head>
 <body>
 <header>
     <a href="/olympics2024" class="btn" th:text="#{sport.home}"></a>
+    <h1 th:text="${sport}"></h1>
+    <a href="/login?logout" class="btn">
+        <span th:text="#{home.logout} + ' -'"></span>
+        <span th:each="auth : ${#authentication.authorities}" th:text="${#strings.substringAfter(auth.authority, 'ROLE_')}"></span>
+    </a>
 </header>
 <div class="form-container">
     <form th:action="@{/olympics2024/games/create/{name}(name=${#strings.toLowerCase(sport)})}" th:object="${game}" method="post" class="form">

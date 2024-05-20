@@ -2,16 +2,23 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
-    <title>Sport Details</title>
+    <title>Olympics 2024</title>
     <link rel="stylesheet" type="text/css" href="/css/sportdetail.css">
 </head>
 <body>
 
 <header>
     <a href="/olympics2024" class="btn" th:text="#{sport.home}"></a>
-    <th:block th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
-        <a th:href="@{'/olympics2024/sports/' + ${#strings.toLowerCase(sport.name)} + '/games/create'}" class="btn" th:text="'+ ' + #{sport.addgame}"></a>
-    </th:block>
+    <h1 th:text="${sport.name}"></h1>
+    <div>
+        <th:block th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
+            <a th:href="@{'/olympics2024/sports/' + ${#strings.toLowerCase(sport.name)} + '/games/create'}" class="btn" th:text="'+ ' + #{sport.addgame}"></a>
+        </th:block>
+        <a href="/login?logout" class="btn">
+            <span th:text="#{home.logout} + ' -'"></span>
+            <span th:each="auth : ${#authentication.authorities}" th:text="${#strings.substringAfter(auth.authority, 'ROLE_')}"></span>
+        </a>
+    </div>
 </header>
 
 <div class="message" th:if="${success}" th:text="${success}"></div>

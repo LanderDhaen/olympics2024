@@ -26,7 +26,7 @@ public class LoginController {
         }
         if (logout != null) {
             String logoutMessage = messageSource.getMessage("login.logout", null, LocaleContextHolder.getLocale());
-            model.addAttribute("msg", logoutMessage);
+            model.addAttribute("message", logoutMessage);
         }
         return "login";
     }

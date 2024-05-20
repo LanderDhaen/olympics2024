@@ -8,12 +8,15 @@
 <body>
 <header>
     <h1 th:text="#{home.header}"/>
-    <th:block th:if="${#authorization.expression('hasRole(''USER'')')}">
-        <th:block th:if="${not #lists.isEmpty(tickets)}">
-            <a href="/olympics2024/tickets" class="btn" th:text="#{home.ticketbutton}"/>
-        </th:block>
-    </th:block>
-
+    <div>
+            <th:block th:if="${not #lists.isEmpty(tickets)}">
+                <a href="/olympics2024/tickets" class="btn" th:text="#{home.ticketbutton}"/>
+            </th:block>
+        <a href="/login?logout" class="btn">
+            <span th:text="#{home.logout} + ' -'"></span>
+            <span th:each="auth : ${#authentication.authorities}" th:text="${#strings.substringAfter(auth.authority, 'ROLE_')}"></span>
+        </a>
+    </div>
 </header>
 
 <div class="sports-container">
