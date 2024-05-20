@@ -4,6 +4,8 @@ import domain.Game;
 import domain.Spectator;
 import domain.Ticket;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,6 +25,9 @@ public class TicketController {
 
     @Autowired
     SpectatorService spectatorService;
+
+    @Autowired
+    private MessageSource messageSource;
 
     private static final int MAX_GAME = 20;
     private static final int MAX_TOTAL = 100;
@@ -62,7 +67,7 @@ public class TicketController {
             model.addAttribute("spectator", spectator);
             model.addAttribute("game", game);
             model.addAttribute("name", game.getSport().getName().toLowerCase());
-            model.addAttribute("error", "Je kan niet meer dan 20 tickets voor 1 wedstrijd kopen.");
+            model.addAttribute("error", messageSource.getMessage("ticket.validTickets.maxGame", new Object[]{MAX_GAME}, LocaleContextHolder.getLocale()));
             return "ticketform";
         }
 
@@ -70,7 +75,7 @@ public class TicketController {
             model.addAttribute("spectator", spectator);
             model.addAttribute("game", game);
             model.addAttribute("name", game.getSport().getName().toLowerCase());
-            model.addAttribute("error", "In totaal kan je niet meer dan 100 tickets kopen voor alle wedstrijden van alle sporten.");
+            model.addAttribute("error", messageSource.getMessage("ticket.validTickets.maxTickets", new Object[]{MAX_TOTAL}, LocaleContextHolder.getLocale()));
             return "ticketform";
         }
 
@@ -78,7 +83,7 @@ public class TicketController {
             model.addAttribute("spectator", spectator);
             model.addAttribute("game", game);
             model.addAttribute("name", game.getSport().getName().toLowerCase());
-            model.addAttribute("error", "Deze wedstrijd heeft maar 10 zitjes meer");
+            model.addAttribute("error", messageSource.getMessage("ticket.validTickets.remainingSeats", new Object[]{game.getRemainingSeats()}, LocaleContextHolder.getLocale()));
             return "ticketform";
         }
 
@@ -86,7 +91,7 @@ public class TicketController {
         gameService.save(game);
         spectatorService.buyTickets(spectator, game, tickets);
 
-        redirectAttributes.addFlashAttribute("success", tickets + "tickets");
+        redirectAttributes.addFlashAttribute("success", messageSource.getMessage("ticket.success", new Object[]{tickets}, LocaleContextHolder.getLocale()));
         return "redirect:/olympics2024/sports/{name}";
     }
 
