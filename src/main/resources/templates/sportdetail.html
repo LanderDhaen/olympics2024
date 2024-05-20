@@ -14,7 +14,10 @@
         <th:block th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
             <a th:href="@{'/olympics2024/sports/' + ${#strings.toLowerCase(sport.name)} + '/games/create'}" class="btn" th:text="'+ ' + #{sport.addgame}"></a>
         </th:block>
-        <a href="/login?logout" class="btn" th:text="#{home.logout}"/>
+        <a href="/login?logout" class="btn">
+            <span th:text="#{home.logout} + ' -'"></span>
+            <span th:each="auth : ${#authentication.authorities}" th:text="${#strings.substringAfter(auth.authority, 'ROLE_')}"></span>
+        </a>
     </div>
 </header>
 
