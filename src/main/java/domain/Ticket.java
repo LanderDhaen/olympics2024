@@ -9,7 +9,7 @@ import java.io.Serializable;
 
 @Entity
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor(access = AccessLevel.PUBLIC)
 public class Ticket implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -23,7 +23,7 @@ public class Ticket implements Serializable {
     private Game game;
 
     @ManyToOne
-    @JoinColumn(name = "specatorID")
+    @JoinColumn(name = "spectatorID")
     private Spectator spectator;
 
     public Ticket(Game game, Spectator spectator) {

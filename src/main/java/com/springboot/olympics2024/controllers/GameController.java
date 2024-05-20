@@ -37,8 +37,6 @@ public class GameController {
     private OlympicNumberValidator olympicNumberValidator;
     @Autowired
     private RemainingSeatsValidator remainingSeatsValidator;
-    @Autowired
-    private View error;
 
     @GetMapping("/sports/{name}/games/create")
     public String showForm(@PathVariable("name") String name, Model model) {

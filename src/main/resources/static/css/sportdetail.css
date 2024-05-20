@@ -76,11 +76,22 @@ td {
     border: 1px solid #ddd;
 }
 
-td.center, td.center {
+td.center {
     text-align: center;
 }
 
 ul {
     list-style-type: none;
     padding: 0;
+}
+
+.message {
+    position: fixed;
+    top: 10%;
+    left: 50%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 16px;
+    border-radius: 5px;
+    transform: translate(-20%, -50%);
 }
