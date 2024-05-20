@@ -63,6 +63,9 @@ public class Game implements Serializable {
     @JoinColumn(name = "sportID")
     private Sport sport;
 
+    @OneToMany(mappedBy = "game")
+    private List<Ticket> tickets;
+
     public Game(LocalDateTime date, int olympicNumber1, int olympicNumber2, int remainingSeats, Double ticketPrice, List<Discipline> disciplines, Stadium stadium, Sport sport) {
         this.date = date;
         this.olympicNumber1 = olympicNumber1;

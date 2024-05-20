@@ -9,15 +9,12 @@
 
 <header>
     <a href="/olympics2024" class="btn" th:text="#{sport.home}"></a>
-    <h1 th:text="${sport.name}"></h1>
-    <th:block th:if="${#authorization.expression('hasRole(''USER'')')}">
-        <a href="/olympics2024/tickets" class="btn" th:text="#{home.ticketbutton}"></a>
-    </th:block>
     <th:block th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
-        <a th:href="@{~/olympics2024/games/create/{name}(name=${#strings.toLowerCase(sport.name)})}" class="btn" th:text="'+ ' + #{sport.addgame}"></a>
+        <a th:href="@{'/olympics2024/sports/' + ${#strings.toLowerCase(sport.name)} + '/games/create'}" class="btn" th:text="'+ ' + #{sport.addgame}"></a>
     </th:block>
 </header>
 
+<div class="message" th:if="${success}" th:text="${success}"></div>
 <div class="discipline-container">
     <table>
         <thead>
@@ -27,6 +24,7 @@
             <th th:text="#{sport.location}" />
             <th th:text="#{sport.seats}" />
             <th th:text="#{sport.price}" />
+            <th th:if="${#authorization.expression('hasRole(''USER'')')}" th:text="#{sport.tickets}" />
         </tr>
         </thead>
         <tbody th:if="${not #lists.isEmpty(sport.games)}">
@@ -41,14 +39,19 @@
             <td class="center" th:text="${#temporals.format(game.date, #messages.msg('date.format.pattern'))}" />
             <td class="center" th:text="${game.stadium.name}" />
             <td class="center" th:text="${game.remainingSeats} + '/' + ${game.stadium.capacity}" />
-            <td class="center" th:if="${#authorization.expression('hasRole(''ADMIN'')')}" th:text="'€' + ${#numbers.formatDecimal(game.ticketPrice, 0, 'DEFAULT', 2, 'POINT')}" />
-            <td class="center" th:if="${#authorization.expression('hasRole(''USER'')') and game.remainingSeats > 0}" th:text="'€' + ${#numbers.formatDecimal(game.ticketPrice, 0, 'DEFAULT', 2, 'POINT')}" />
+            <td class="center" th:if="${#authorization.expression('hasRole(''ADMIN'')') or (#authorization.expression('hasRole(''USER'')') and game.remainingSeats > 0)}" th:text="'€' + ${#numbers.formatDecimal(game.ticketPrice, 0, 'DEFAULT', 2, 'POINT')}" />
             <td class="center" th:if="${#authorization.expression('hasRole(''USER'')') and game.remainingSeats <= 0}" th:text="'-'" />
+            <td class="center" th:if="${#authorization.expression('hasRole(''USER'')')}">
+                <span th:text="${__${'count_' + game.id}__}"></span>
+                <th:block th:if="${game.remainingSeats > 0}">
+                    <a th:href="@{'/olympics2024/sports/' + ${#strings.toLowerCase(sport.name)} + '/games/' + ${game.id} + '/buy'}" class="ticket-btn" th:text="#{sport.buy}"></a>
+                </th:block>
+            </td>
         </tr>
         </tbody>
         <tbody th:if="${#lists.isEmpty(sport.games)}">
         <tr>
-            <td colspan="5" class="center" th:text="#{sport.nogames}"/>
+            <td colspan="6" class="center" th:text="#{sport.nogames}"/>
         </tr>
         </tbody>
     </table>

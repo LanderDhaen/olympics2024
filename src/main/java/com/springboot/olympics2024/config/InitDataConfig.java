@@ -1,6 +1,7 @@
 package com.springboot.olympics2024.config;
 
 import domain.*;
+import org.antlr.v4.runtime.misc.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -26,6 +27,8 @@ public class InitDataConfig implements CommandLineRunner {
     private SpectatorRepository spectatorRepository;
     @Autowired
     private StadiumRepository stadiumRepository;
+    @Autowired
+    private TicketRepository ticketRepository;
 
     private PasswordEncoder encoder = new BCryptPasswordEncoder();
 
@@ -34,7 +37,8 @@ public class InitDataConfig implements CommandLineRunner {
 
         // Seeding database with spectators
 
-        spectatorRepository.save(new Spectator("User", encoder.encode("12345678"), Role.USER));
+        Spectator user = spectatorRepository.save(new Spectator("User", encoder.encode("12345678"), Role.USER));
+        Spectator lander = spectatorRepository.save(new Spectator("Lander", encoder.encode("87654321"), Role.USER));
         spectatorRepository.save(new Spectator("Admin", encoder.encode("12345678"), Role.ADMIN));
 
         // Seeding database with stadiums
@@ -76,15 +80,21 @@ public class InitDataConfig implements CommandLineRunner {
         Discipline womensCanoeSprint = disciplineRepository.save(new Discipline("Canoe Single 200m", false, canoe));
 
         // Seeding the database with games
-    /*
-        gameRepository.save(new Game(LocalDateTime.of(2024, Month.JULY, 31, 18, 35), "Place de la Concorde 1", 0, 99.99, basketball, List.of(mens3x3)));
+
+        gameRepository.save(new Game(LocalDateTime.of(2024, Month.JULY, 31, 18, 35), 55555, 55540, 5, 99.99, List.of(mens3x3), concorde,basketball));
+
+        /*
         gameRepository.save(new Game(LocalDateTime.of(2024, Month.JULY, 30, 17, 30), "Place de la Concorde 1", 10, 99.99, basketball, List.of(mens3x3)));
         gameRepository.save(new Game(LocalDateTime.of(2024, Month.JULY, 30, 18, 35), "Place de la Concorde 1", 44, 99.99, basketball, List.of(womens3x3)));
 
-        gameRepository.save(new Game(LocalDateTime.of(2024, Month.JULY, 27, 15, 40), 25000, 25099, 0, 99.99, List.of(womensCanoeSlalom, mensCanoeSlalom), vaires, canoe));
+
+         */
+        Game womensCanoeSlalomSingle = gameRepository.save(new Game(LocalDateTime.of(2024, Month.JULY, 27, 15, 40), 25000, 25099, 0, 99.99, List.of(womensCanoeSlalom, mensCanoeSlalom), vaires, canoe));
         gameRepository.save(new Game(LocalDateTime.of(2024, Month.AUGUST, 8, 10, 30), 12356, 12346, 34, 49.99, List.of(womensCanoeSprint, mensCanoeSprint), vaires, canoe));
 
+        // Seeding the database with tickets
 
-     */
+        ticketRepository.save(new Ticket(womensCanoeSlalomSingle, user));
+
     }
 }

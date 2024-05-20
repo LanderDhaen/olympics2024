@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Sport Details</title>
+    <link rel="stylesheet" type="text/css" href="/css/tickets.css">
+</head>
+<body>
+
+<header>
+    <a href="/olympics2024" class="btn" th:text="#{sport.home}"></a>
+</header>
+
+<div class="tickets-container">
+    <table>
+        <thead>
+        <tr>
+            <th th:text="#{sport.sport}" />
+            <th th:text="#{sport.discipline}" />
+            <th th:text="#{sport.date}" />
+            <th th:text="#{sport.location}" />
+        </tr>
+        </thead>
+        <tbody th:if="${not #lists.isEmpty(tickets)}">
+        <tr th:each="ticket : ${tickets}">
+            <td class="center" th:text="${ticket.game.sport.name}" />
+            <td>
+                <ul>
+                    <li th:each="discipline : ${ticket.game.disciplines}">
+                        <span th:text="'⮕ ' + ${discipline.name} + ' (' + (${discipline.gender} ? 'Men' : 'Women') + ')'" />
+                    </li>
+                </ul>
+            </td>
+            <td class="center" th:text="${#temporals.format(ticket.game.date, #messages.msg('date.format.pattern'))}" />
+            <td class="center" th:text="${ticket.game.stadium.name}" />
+        </tr>
+        </tbody>
+        <tbody th:if="${#lists.isEmpty(tickets)}">
+        <tr>
+            <td colspan="6" class="center" th:text="#{ticket.noTickets}"/>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

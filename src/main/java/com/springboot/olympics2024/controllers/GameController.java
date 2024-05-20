@@ -37,10 +37,8 @@ public class GameController {
     private OlympicNumberValidator olympicNumberValidator;
     @Autowired
     private RemainingSeatsValidator remainingSeatsValidator;
-    @Autowired
-    private View error;
 
-    @GetMapping("/games/create/{name}")
+    @GetMapping("/sports/{name}/games/create")
     public String showForm(@PathVariable("name") String name, Model model) {
 
         Sport sport = sportService.findByName(name);
@@ -53,7 +51,7 @@ public class GameController {
         return "gameform";
     }
 
-    @PostMapping("/games/create/{name}")
+    @PostMapping("/sports/{name}/games/create")
     public String addGame(@Valid Game game, BindingResult result, @PathVariable("name") String name, Model model) {
 
         olympicNumberValidator.validate(game, result);

@@ -30,17 +30,6 @@ header {
     box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
 }
 
-.ticket-btn {
-    background-color: #0056b3;
-    color: #fff;
-    text-decoration: none;
-    border-radius: 5px;
-    transition: background-color 0.3s ease, color 0.3s ease;
-    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
-    padding: 10px;
-    margin-left: 20px;
-}
-
 .btn:hover {
     background-color: #004080;
 }
@@ -49,7 +38,7 @@ h1, h2 {
     color: #333;
 }
 
-.discipline-container {
+.tickets-container {
     display: flex;
     align-items: center;
     padding: 50px;
@@ -83,15 +72,5 @@ td.center {
 ul {
     list-style-type: none;
     padding: 0;
-}
-
-.message {
-    position: fixed;
-    bottom: 10px;
-    left: 10px;
-    background-color: #4CAF50;
-    color: white;
-    padding: 16px;
-    border-radius: 5px;
 }
 

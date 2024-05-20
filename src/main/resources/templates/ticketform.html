@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/css/ticketform.css">
+    <title>Buy Game</title>
+</head>
+<body>
+<header>
+    <a href="/olympics2024" class="btn" th:text="#{sport.home}"></a>
+</header>
+<div class="form-container">
+    <div class="info-container">
+        <p><strong th:text="#{gameform.date}"></strong><span th:text="${#temporals.format(game.date, 'dd-MM-yyyy HH:mm')}"></span></p>
+        <p><strong th:text="#{gameform.stadium}"></strong><span th:text="${game.stadium.name}"></span></p>
+        <p><strong th:text="#{gameform.remainingSeats}"></strong><span th:text="${game.remainingSeats}"></span></p>
+        <p><strong th:text="#{gameform.ticketPrice}"></strong><span th:text="'€' + ${#numbers.formatDecimal(game.ticketPrice, 0, 'DEFAULT', 2, 'POINT')}"></span></p>
+    </div>
+    <form th:action="@{'/olympics2024/sports/' + ${name} + '/games/' + ${game.id} + '/buy'}" method="post" th:object="${ticketForm}">
+        <div class="form-group">
+            <div class="form-input">
+                <label for="tickets" th:text="#{ticket.numberOfTickets}"></label>
+                <input type="number" id="tickets" name="tickets" class="input-container" th:field="*{amount}">
+            </div>
+            <div class="error-msg" th:if="${#fields.hasErrors('amount')}" th:errors="*{amount}"></div>
+        </div>
+        <div class="btn-container">
+            <button class="btn" type="submit" th:text="#{sport.buy}"></button>
+        </div>
+    </form>
+</div>
+</body>
+</html>
