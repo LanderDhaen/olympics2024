@@ -34,9 +34,12 @@ public class SecurityConfig{
                                 .requestMatchers("/css/**").permitAll()
                                 .requestMatchers("/accessdenied**").permitAll()
                                 .requestMatchers("/olympics2024").hasAnyRole("USER", "ADMIN")
-                                .requestMatchers("/olympics2024/sports/**").hasAnyRole("USER", "ADMIN")
-                                .requestMatchers("/olympics2024/games/create/**").hasRole("ADMIN"))
-                .formLogin(form ->
+                                .requestMatchers("/olympics2024/sports/*").hasAnyRole("USER", "ADMIN")
+                                .requestMatchers("/olympics2024/sports/*/games/create").hasRole("ADMIN")
+                                .requestMatchers("/olympics2024/sports/*/games/*/buy").hasRole("USER")
+                                .requestMatchers("/olympics2024/tickets").hasRole("USER"))
+
+                                .formLogin(form ->
                         form
                                 .defaultSuccessUrl("/olympics2024", true)
                                 .loginPage("/login"))
