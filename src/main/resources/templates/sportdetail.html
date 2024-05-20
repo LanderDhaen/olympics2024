@@ -9,7 +9,6 @@
 
 <header>
     <a href="/olympics2024" class="btn" th:text="#{sport.home}"></a>
-    <h1 th:text="${sport.name}"></h1>
     <th:block th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
         <a th:href="@{'/olympics2024/sports/' + ${#strings.toLowerCase(sport.name)} + '/games/create'}" class="btn" th:text="'+ ' + #{sport.addgame}"></a>
     </th:block>
