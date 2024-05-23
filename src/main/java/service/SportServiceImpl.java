@@ -1,16 +1,12 @@
 package service;
 
-import domain.Discipline;
-import domain.Sport;
-import domain.Game;
+import domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import repository.SportRepository;
 
 import java.lang.reflect.Array;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class SportServiceImpl implements SportService {
@@ -31,5 +27,24 @@ public class SportServiceImpl implements SportService {
         sport.getGames().sort(Comparator.comparing(Game::getDate));
 
         return sport;
+    }
+
+    @Override
+    public Map<Long, Integer> calculateTicketAmounts(Sport sport, Spectator spectator) {
+
+        Map<Long, Integer> ticketAmounts = new HashMap<>();
+
+        for (Game game : sport.getGames()) {
+            int count = 0;
+            for (Ticket ticket : spectator.getTickets()) {
+                if (ticket.getGame().getId().equals(game.getId())) {
+                    count++;
+                }
+            }
+            ticketAmounts.put(game.getId(), count);
+        }
+
+        return ticketAmounts;
+
     }
 }

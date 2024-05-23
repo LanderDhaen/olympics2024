@@ -16,6 +16,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import service.SpectatorService;
 import service.SportService;
 
+import java.util.Map;
+
 @Controller
 @RequestMapping("/olympics2024")
 public class SportController {
@@ -34,17 +36,10 @@ public class SportController {
 
         model.addAttribute("sport", sport);
 
-        for(Game game : sport.getGames()) {
+        Map<Long, Integer> ticketAmounts = sportService.calculateTicketAmounts(sport, spectator);
 
-            int count = 0;
-
-            for(Ticket ticket : spectator.getTickets()) {
-                if (ticket.getGame().getId().equals(game.getId())) {
-                    count++;
-                }
-            }
-
-            model.addAttribute("count_" + game.getId().toString(), count);
+        for (Map.Entry<Long, Integer> entry : ticketAmounts.entrySet()) {
+            model.addAttribute("count_" + entry.getKey(), entry.getValue());
         }
 
         if (redirectAttributes.containsAttribute("success")) {
