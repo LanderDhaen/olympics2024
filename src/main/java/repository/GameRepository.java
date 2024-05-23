@@ -14,6 +14,6 @@ public interface GameRepository extends JpaRepository<Game, Long> {
     List<Game> findGamesBySport(@Param("id") Long id);
 
     @Query("SELECT g.remainingSeats FROM Game g WHERE g.id = :id")
-    int findRemainingSeatsByGame(@Param("id") Long id);
+    Integer findRemainingSeatsByGame(@Param("id") Long id);
 
 }

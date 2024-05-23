@@ -36,9 +36,6 @@ public class BuyController {
     @Autowired
     MessageSource messageSource;
 
-    private static final int MAX_GAME = 20;
-    private static final int MAX_TOTAL = 100;
-
     @GetMapping("/sports/{name}/games/{id}/buy")
     public String showForm(@PathVariable Long id, Model model, Authentication authentication) {
 
