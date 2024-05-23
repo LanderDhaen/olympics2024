@@ -1,5 +1,8 @@
 package domain;
 
+import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import jakarta.validation.constraints.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -7,6 +10,8 @@ import lombok.NoArgsConstructor;
 
 import jakarta.persistence.*;
 import lombok.Setter;
+import util.DateDeserializer;
+import util.DateSerializer;
 import validator.ValidDate;
 import validator.ValidDisciplines;
 
@@ -18,17 +23,20 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
-
+@JsonPropertyOrder({"gameID", "date", "olympicNumber1", "olympicNumber2", "remainingSeats", "ticketPrice"})
 public class Game implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonProperty("gameID")
     private Long id;
 
     @NotNull(message = "{validator.emptyInput}")
     @ValidDate
+    @JsonSerialize(using = DateSerializer.class)
+    @JsonDeserialize(using = DateDeserializer.class)
     private LocalDateTime date;
 
     @NotNull(message = "{validator.emptyInput}")
@@ -52,6 +60,7 @@ public class Game implements Serializable {
             joinColumns = @JoinColumn(name = "gameid"),
             inverseJoinColumns = @JoinColumn(name = "disciplineid")
     )
+    @JsonBackReference
     private List<Discipline> disciplines;
 
     @NotNull(message = "{validator.emptyInput}")
@@ -61,9 +70,11 @@ public class Game implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "sportID")
+    @JsonBackReference
     private Sport sport;
 
     @OneToMany(mappedBy = "game")
+    @JsonBackReference
     private List<Ticket> tickets;
 
     public Game(LocalDateTime date, int olympicNumber1, int olympicNumber2, int remainingSeats, Double ticketPrice, List<Discipline> disciplines, Stadium stadium, Sport sport) {

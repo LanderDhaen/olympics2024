@@ -37,7 +37,9 @@ public class SecurityConfig{
                                 .requestMatchers("/olympics2024/sports/*").hasAnyRole("USER", "ADMIN")
                                 .requestMatchers("/olympics2024/sports/*/games/create").hasRole("ADMIN")
                                 .requestMatchers("/olympics2024/sports/*/games/*/buy").hasRole("USER")
-                                .requestMatchers("/olympics2024/tickets").hasRole("USER"))
+                                .requestMatchers("/olympics2024/tickets").hasRole("USER")
+                                .requestMatchers("/rest/sports/*/games").hasRole("ADMIN")
+                                .requestMatchers("/rest/games/*/seats").hasRole("ADMIN"))
 
                                 .formLogin(form ->
                         form

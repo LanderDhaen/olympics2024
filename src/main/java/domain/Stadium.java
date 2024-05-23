@@ -1,5 +1,6 @@
 package domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -24,6 +25,7 @@ public class Stadium implements Serializable {
     private int capacity;
 
     @OneToMany(mappedBy = "stadium")
+    @JsonBackReference
     private List<Game> games;
 
     public Stadium(String name, int capacity, List<Game> games) {

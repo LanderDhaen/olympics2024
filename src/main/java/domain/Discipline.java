@@ -1,5 +1,7 @@
 package domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,6 +28,7 @@ public class Discipline implements Serializable {
     private boolean gender;
 
     @ManyToOne
+    @JsonBackReference
     private Sport sport;
 
     @ManyToMany
@@ -34,6 +37,7 @@ public class Discipline implements Serializable {
             joinColumns = @JoinColumn(name = "disciplineid"),
             inverseJoinColumns = @JoinColumn(name = "gameid")
     )
+    @JsonBackReference
     private List<Game> games;
 
 
