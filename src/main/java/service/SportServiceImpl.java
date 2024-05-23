@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import repository.SportRepository;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
@@ -21,6 +23,7 @@ public class SportServiceImpl implements SportService {
         return sportRepository.findAll();
     }
 
+    @Override
     public Sport findByName(String name) {
 
         Sport sport = sportRepository.findByName(name);

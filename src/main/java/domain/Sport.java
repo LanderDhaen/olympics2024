@@ -1,5 +1,7 @@
 package domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,9 +26,11 @@ public class Sport implements Serializable {
     private String name;
 
     @OneToMany(mappedBy = "sport")
+    @JsonManagedReference
     private List<Game> games;
 
     @OneToMany(mappedBy = "sport")
+    @JsonManagedReference
     private List<Discipline> disciplines;
 
     public Sport(String name) {

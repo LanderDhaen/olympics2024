@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import repository.GameRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -23,7 +24,18 @@ public class GameServiceImpl implements GameService {
         gameRepository.save(game);
     }
 
+    @Override
     public Optional<Game> findById(Long id) {
         return gameRepository.findById(id);
+    }
+
+    @Override
+    public List<Game> findGamesBySport(Long id) {
+        return gameRepository.findGamesBySport(id);
+    }
+
+    @Override
+    public int findRemainingSeatsByGame(Long id) {
+        return gameRepository.findRemainingSeatsByGame(id);
     }
 }
