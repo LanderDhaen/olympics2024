@@ -4,12 +4,9 @@ import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import jakarta.validation.constraints.*;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import jakarta.persistence.*;
-import lombok.Setter;
 import util.DateDeserializer;
 import util.DateSerializer;
 import validator.ValidDate;
@@ -87,6 +84,19 @@ public class Game implements Serializable {
         this.stadium = stadium;
         this.sport = sport;
     }
+
+    public Game(Long id, LocalDateTime date, int olympicNumber1, int olympicNumber2, int remainingSeats, Double ticketPrice, List<Discipline> disciplines, Stadium stadium, Sport sport) {
+        this.id = id;
+        this.date = date;
+        this.olympicNumber1 = olympicNumber1;
+        this.olympicNumber2 = olympicNumber2;
+        this.remainingSeats = remainingSeats;
+        this.ticketPrice = ticketPrice;
+        this.disciplines = disciplines;
+        this.stadium = stadium;
+        this.sport = sport;
+    }
+
 }
 
 

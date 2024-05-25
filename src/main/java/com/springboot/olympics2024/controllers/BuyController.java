@@ -2,7 +2,6 @@ package com.springboot.olympics2024.controllers;
 
 import domain.Game;
 import domain.Spectator;
-import domain.Ticket;
 import domain.TicketForm;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
