@@ -34,6 +34,12 @@ public class Stadium implements Serializable {
         this.games = games;
     }
 
+    public Stadium(Long id, String name, int capacity) {
+        this.id = id;
+        this.name = name;
+        this.capacity = capacity;
+    }
+
     public Stadium(String name, int capacity) {
         this.name = name;
         this.capacity = capacity;

@@ -10,6 +10,6 @@ public interface GameService {
     void save(Game game);
     Optional<Game> findById(Long id);
     List<Game> findGamesBySport(Long id);
-    int findRemainingSeatsByGame(Long id);
+    Integer findRemainingSeatsByGame(Long id);
 }
 

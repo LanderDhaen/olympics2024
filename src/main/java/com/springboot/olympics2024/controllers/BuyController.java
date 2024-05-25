@@ -2,7 +2,6 @@ package com.springboot.olympics2024.controllers;
 
 import domain.Game;
 import domain.Spectator;
-import domain.Ticket;
 import domain.TicketForm;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import service.GameService;
 import service.SpectatorService;
+import service.TicketService;
 import validator.TicketValidator;
 
 import java.util.Optional;
@@ -35,9 +35,8 @@ public class BuyController {
 
     @Autowired
     MessageSource messageSource;
-
-    private static final int MAX_GAME = 20;
-    private static final int MAX_TOTAL = 100;
+    @Autowired
+    private TicketService ticketService;
 
     @GetMapping("/sports/{name}/games/{id}/buy")
     public String showForm(@PathVariable Long id, Model model, Authentication authentication) {
@@ -77,7 +76,7 @@ public class BuyController {
 
         game.setRemainingSeats(game.getRemainingSeats() - amount);
         gameService.save(game);
-        spectatorService.buyTickets(spectator, game, amount);
+        ticketService.buyTickets(spectator, game, amount);
 
         redirectAttributes.addFlashAttribute("success", messageSource.getMessage("ticket.success", new Object[]{amount}, LocaleContextHolder.getLocale()));
         return "redirect:/olympics2024/sports/{name}";

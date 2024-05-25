@@ -24,7 +24,7 @@ public class GameRestController {
     }
 
     @GetMapping(value = "/games/{id}/seats")
-    public int getRemainingSeatsByGame(@PathVariable("id") Long id) {
+    public Integer getRemainingSeatsByGame(@PathVariable("id") Long id) {
         return gameService.findRemainingSeatsByGame(id);
     }
 

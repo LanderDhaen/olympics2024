@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import service.SpectatorService;
+import service.TicketService;
 
 import java.util.Comparator;
 import java.util.List;
@@ -20,16 +21,16 @@ public class TicketController {
 
     @Autowired
     private SpectatorService spectatorService;
+    @Autowired
+    private TicketService ticketService;
 
     @GetMapping("/tickets")
     public String tickets(Model model, Authentication authentication) {
 
         Spectator spectator = spectatorService.findByUsername(authentication.getName());
 
-        List<Ticket> tickets = spectator.getTickets().stream()
-                                                     .sorted(Comparator.comparing((Ticket ticket) -> ticket.getGame().getSport().getName())
-                                                                       .thenComparing(ticket -> ticket.getGame().getDate()))
-                                                     .toList();
+        List<Ticket> tickets = ticketService.sortTicketsBySportAndDate(spectator.getTickets());
+
         model.addAttribute("tickets", tickets);
 
         return "tickets";

@@ -11,14 +11,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.View;
 import service.GameService;
 import service.SportService;
 import service.StadiumService;
 import validator.OlympicNumberValidator;
 import validator.RemainingSeatsValidator;
-
-import java.util.List;
 
 @Controller
 @RequestMapping("/olympics2024")
